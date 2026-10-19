@@ -1,0 +1,53 @@
+# ============ 密钥与配置（只保留模板） ============
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+credentials*
+token*
+
+# ============ 数据与产物（不入库） ============
+data/
+outputs/
+web/.cache/
+deploy/dist/
+*.sqlite3
+*.db
+*.log
+
+# ============ 依赖与缓存 ============
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+node_modules/
+__MACOSX/
+.DS_Store
+
+# ============ 工具与内部资料 ============
+.impeccable/
+.workbuddy/
+
+# ============ 队友原始交付包（代码已并入 app/ 与 creative_agent/） ============
+analysis-agent-v0.4/
+customer_discovery_handoff/
+黑客松（营销策划）/
+creative-agent/
+AI Marketing Employee 团队分工方案 v2.md
+AI Marketing Employee 项目构想.md
+
+# ============ 本地临时 ============
+*.zip
+
+# 工作区快照 / 临时脚本
+.shots/
+assets/
+
+# 内部文档与演示材料（本地保留，不入库）
+docs/
+ppt/
+DESIGN.md
+PRODUCT.md

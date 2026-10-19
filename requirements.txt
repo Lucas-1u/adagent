@@ -1,0 +1,21 @@
+# AI Marketing Employee —— Python 依赖
+# 全量安装：pip install -r requirements.txt
+#
+# 说明：
+#   - 队友（开发单个 Agent）：最小集 = openai + pydantic (+ python-dotenv)
+#   - 总控（跑图 / 集成）：需要全部
+
+langgraph>=0.2
+openai>=1.0
+pydantic>=2.0
+python-dotenv>=1.0
+# Web 工作台（app/server.py）
+fastapi>=0.110
+uvicorn>=0.30
+# 广告素材节点（项目根 creative_agent/ 包：设计版式引擎 + 图像后端）
+Pillow>=10.0
+requests>=2.31
+# 客户发现节点（customer_discovery 包）的 HTTP 依赖
+httpx>=0.27
+# 开发/验证：离线测试
+pytest>=8.0

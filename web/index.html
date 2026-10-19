@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Marketing Employee · 一人广告公司</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <svg class="mark" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <circle cx="9" cy="17" r="5" fill="none" stroke="#2E6FD8" stroke-width="3.5"/>
+        <circle cx="25" cy="17" r="5" fill="none" stroke="#F0A322" stroke-width="3.5"/>
+        <path d="M14 17 H20" stroke="#E0433C" stroke-width="3.5"/>
+      </svg>
+      <div class="brand-text">
+        <strong>AI Marketing Employee</strong>
+        <span>一人广告公司（OPC）· 5 个 AI 员工</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="modes" role="group" aria-label="运行模式">
+        <button class="mode is-on" data-mode="realtime" type="button">实时</button>
+        <button class="mode" data-mode="fast" type="button">加速回放</button>
+      </div>
+      <div class="conn" id="conn">
+        <span class="conn-dot" id="conn-dot"></span>
+        <span id="conn-text">连接中…</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- ==================== 左栏：需求输入 ==================== -->
+    <section class="panel input-panel">
+      <h2 class="panel-title">本次需求</h2>
+      <p class="demo-notice" id="demo-notice" hidden>
+        <span class="mono">REPLAY</span>下面这份需求与结果，来自<strong>上一次真实测试</strong>（不是现场重跑）。点下方「开始回放」查看完整执行过程。
+      </p>
+      <p class="field-label">把客户的一句话丢给团队，剩下的它来</p>
+      <textarea id="req" rows="4" placeholder="例：寻找武汉地区适合年轻女性消费的拼豆店，帮它做一轮推广"></textarea>
+      <div class="chips">
+        <button class="chip" type="button" data-fill="一家在武汉地区适合年轻人消费放松的复古咖啡厅">一键真实实例</button>
+      </div>
+      <button id="start" class="primary" type="button" disabled>开始执行</button>
+      <p class="hint" id="mode-hint">实时模式：真实运行，约 30–60 秒；可切加速回放。</p>
+    </section>
+
+    <!-- ==================== 中栏：执行线路 ==================== -->
+    <section class="panel flow-panel">
+      <div class="panel-head">
+        <h2 class="panel-title">执行线路</h2>
+        <span class="panel-note mono" id="flow-note">STANDBY</span>
+      </div>
+
+      <div class="route-wrap">
+        <svg id="route" viewBox="0 0 760 250" preserveAspectRatio="xMidYMid meet" aria-label="执行线路图">
+          <!-- 主线区段：底色 + 生长层（draw-on） -->
+          <line class="seg-base" x1="70"  y1="120" x2="220" y2="120"/>
+          <line class="seg-base" x1="220" y1="120" x2="370" y2="120"/>
+          <line class="seg-base" x1="370" y1="120" x2="520" y2="120"/>
+          <line class="seg-base" x1="520" y1="120" x2="680" y2="120"/>
+          <line class="seg" id="seg-customer"  x1="70"  y1="120" x2="220" y2="120" pathLength="100"/>
+          <line class="seg" id="seg-analysis"  x1="220" y1="120" x2="370" y2="120" pathLength="100"/>
+          <line class="seg" id="seg-marketing" x1="370" y1="120" x2="520" y2="120" pathLength="100"/>
+          <line class="seg" id="seg-creative"  x1="520" y1="120" x2="680" y2="120" pathLength="100"/>
+          <!-- 返工支线（默认隐藏） -->
+          <path id="retry-path" class="retry-line" d="M220,138 L220,196 L158,196 L158,138"/>
+          <polygon id="retry-arrow" class="retry-arrow" points="189,189 176,196 189,203"/>
+          <text id="retry-tag" class="retry-tag mono" x="189" y="222" text-anchor="middle">RE-TRY</text>
+          <!-- 站点：客户发现 -->
+          <g class="st is-idle" id="st-customer" data-key="customer">
+            <circle class="pulse" cx="70" cy="120" r="16"/>
+            <circle class="ring" cx="70" cy="120" r="16"/>
+            <circle class="core" cx="70" cy="120" r="5"/>
+            <text class="st-name" x="70" y="162">客户发现</text>
+            <text class="st-state mono" x="70" y="182">STANDBY</text>
+          </g>
+          <!-- 站点：商家分析 -->
+          <g class="st is-idle" id="st-analysis" data-key="analysis">
+            <circle class="pulse" cx="220" cy="120" r="16"/>
+            <circle class="ring" cx="220" cy="120" r="16"/>
+            <circle class="core" cx="220" cy="120" r="5"/>
+            <text class="st-name" x="220" y="162">商家分析</text>
+            <text class="st-state mono" x="220" y="182">STANDBY</text>
+          </g>
+          <!-- 站点：营销策划 -->
+          <g class="st is-idle" id="st-marketing" data-key="marketing">
+            <circle class="pulse" cx="370" cy="120" r="16"/>
+            <circle class="ring" cx="370" cy="120" r="16"/>
+            <circle class="core" cx="370" cy="120" r="5"/>
+            <text class="st-name" x="370" y="162">营销策划</text>
+            <text class="st-state mono" x="370" y="182">STANDBY</text>
+          </g>
+          <!-- 站点：广告素材 -->
+          <g class="st is-idle" id="st-creative" data-key="creative">
+            <circle class="pulse" cx="520" cy="120" r="16"/>
+            <circle class="ring" cx="520" cy="120" r="16"/>
+            <circle class="core" cx="520" cy="120" r="5"/>
+            <text class="st-name" x="520" y="162">广告素材</text>
+            <text class="st-state mono" x="520" y="182">STANDBY</text>
+          </g>
+          <!-- 站点：方案整合（终点站） -->
+          <g class="st is-idle is-terminus" id="st-final" data-key="final">
+            <circle class="pulse" cx="680" cy="120" r="16"/>
+            <circle class="ring2" cx="680" cy="120" r="24"/>
+            <circle class="ring" cx="680" cy="120" r="16"/>
+            <circle class="core" cx="680" cy="120" r="5"/>
+            <text class="st-name" x="680" y="162">方案整合</text>
+            <text class="st-state mono" x="680" y="182">TERMINUS</text>
+          </g>
+        </svg>
+        <!-- 调度注（最新一条，跟随站点弹出） -->
+        <div id="dispatch-pop" class="dispatch-pop" hidden>
+          <p class="dp-line"><span class="dp-tag mono" id="dispatch-tag">调度注</span><span class="dp-text" id="dispatch-text"></span></p>
+        </div>
+      </div>
+
+      <ol id="stream" class="stream" aria-live="polite"></ol>
+    </section>
+
+    <!-- ==================== 右栏：交付成果 ==================== -->
+    <section class="panel result-panel">
+      <div class="panel-head">
+        <h2 class="panel-title">本案交付</h2>
+        <span class="panel-note mono" id="result-note">GENERATING</span>
+      </div>
+      <div id="report" class="report">
+        <div class="report-skeleton" id="report-skeleton">
+          <div class="sk" style="width:62%"></div>
+          <div class="sk" style="width:88%"></div>
+          <div class="sk" style="width:76%"></div>
+          <div class="sk" style="width:40%"></div>
+        </div>
+        <p class="report-idle" id="report-idle">团队交稿后，这里呈现本案交付：主视觉海报、主标语、成品文案与执行清单。</p>
+      </div>
+      <div id="error-bar" class="error-bar" hidden></div>
+    </section>
+  </main>
+</div>
+
+<!-- 素材大图（点击海报/缩略图查看，支持左右翻看） -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close mono" id="lb-close" type="button">ESC · 关闭</button>
+  <button class="lb-nav lb-prev mono" id="lb-prev" type="button" aria-label="上一张">‹</button>
+  <img class="lb-img" id="lb-img" alt="营销素材大图">
+  <button class="lb-nav lb-next mono" id="lb-next" type="button" aria-label="下一张">›</button>
+  <p class="lb-count mono" id="lb-count"></p>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
