@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# AI Marketing Employee —— 服务器一键部署
+# AdAgent —— 服务器一键部署
 # 支持 Ubuntu/Debian（apt）与 CentOS/RHEL（yum）
 #
 # 用法（在服务器上，root 或 sudo）：
@@ -90,7 +90,7 @@ fi
 log "写入 systemd 服务：${SERVICE_NAME}"
 cat > "/etc/systemd/system/${SERVICE_NAME}.service" <<EOF
 [Unit]
-Description=AI Marketing Employee 工作台
+Description=AdAgent 工作台
 After=network.target
 
 [Service]

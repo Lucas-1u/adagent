@@ -7,10 +7,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(r"D:/AI Marketing Employee")
+ROOT = Path(__file__).resolve().parent.parent
 text = (ROOT / "启动工作台.bat").read_text(encoding="gbk")
 text = text.replace(
-    'start "AI Marketing Employee Server" /min ".venv\\Scripts\\python.exe" -m uvicorn app.server:app --host 127.0.0.1 --port 8890',
+    'start "AdAgent Server" /min ".venv\\Scripts\\python.exe" -m uvicorn app.server:app --host 127.0.0.1 --port 8890',
     "echo [TEST] SKIP_START_SERVER",
 )
 text = text.replace('start "" "http://127.0.0.1:8890/?demo=1"', "echo [TEST] SKIP_OPEN_BROWSER")

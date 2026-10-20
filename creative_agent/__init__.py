@@ -1,4 +1,4 @@
-"""Creative Agent —— AI Marketing Employee 的广告素材生成 Agent（队友 4）。
+"""Creative Agent —— AdAgent 的广告素材生成 Agent（队友 4）。
 
 模块入口：
     from creative_agent import CreativeAgent

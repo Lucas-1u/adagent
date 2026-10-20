@@ -1,4 +1,4 @@
-# AI Marketing Employee
+# AdAgent
 
 基于 Agent 的"AI 一人广告团队"（黑客松项目）。
 
@@ -7,7 +7,7 @@
 ## 目录结构
 
 ```
-AI Marketing Employee/
+AdAgent/
 ├── README.md                    # 本文件
 ├── requirements.txt             # Python 依赖
 ├── .env.example                 # 环境变量模板（复制为 .env 填 key）

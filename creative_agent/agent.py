@@ -356,7 +356,7 @@ class CreativeAgent:
         meta = result.meta or {}
         return f"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8">
-<title>广告素材包 · {esc(customer.shop or 'AI Marketing Employee')}</title>
+<title>广告素材包 · {esc(customer.shop or 'AdAgent')}</title>
 <style>
  :root{{--ink:#1d1b1a;--muted:#7c736d;--line:#e6e0da;--bg:#faf7f4;--accent:#c4763a}}
  *{{box-sizing:border-box}}
@@ -417,5 +417,5 @@ class CreativeAgent:
   <h2>投放建议</h2>
   <ul class="advice">{advice}</ul>
 </main>
-<footer>本页面由 Creative Agent 自动生成 · AI Marketing Employee 项目</footer>
+<footer>本页面由 Creative Agent 自动生成 · AdAgent 项目</footer>
 </body></html>"""

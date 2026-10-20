@@ -1,5 +1,5 @@
 """
-AI Marketing Employee —— 工作台服务（FastAPI + SSE）
+AdAgent —— 工作台服务（FastAPI + SSE）
 ===================================================
 
 职责：
@@ -36,7 +36,7 @@ WEB_DIR = ROOT / "web"
 CACHE_FILE = WEB_DIR / ".cache" / "last_run.json"
 FAILED_FILE = WEB_DIR / ".cache" / "last_run_failed.json"
 
-app = FastAPI(title="AI Marketing Employee 工作台")
+app = FastAPI(title="AdAgent 工作台")
 app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="static")
 
 # 素材目录（海报等生成物）静态服务

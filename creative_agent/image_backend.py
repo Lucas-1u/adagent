@@ -122,7 +122,7 @@ class CodexOAuthBackend(BaseBackend):
         headers = {
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "AIMarketingEmployee/0.1 (Creative Agent)",
+            "User-Agent": "AdAgent/0.1 (Creative Agent)",
             "originator": "hermes-agent",
             "x-codex-image-turn-id": str(uuid.uuid4()),
         }
@@ -236,7 +236,7 @@ class XAIBackend(BaseBackend):
         resp = requests.post(f"{self.base_url}/images/generations",
                              headers={"Authorization": f"Bearer {self.api_key}",
                                       "Content-Type": "application/json",
-                                      "User-Agent": "AIMarketingEmployee/0.1 (Creative Agent)"},
+                                      "User-Agent": "AdAgent/0.1 (Creative Agent)"},
                              json=body, timeout=180)
         if resp.status_code >= 400:
             raise ImageBackendError(f"xAI 图片接口 HTTP {resp.status_code}: {resp.text[:300]}")

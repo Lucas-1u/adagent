@@ -1,1 +1,1 @@
-"""AI Marketing Employee —— 应用包。"""
+"""AdAgent —— 应用包。"""
